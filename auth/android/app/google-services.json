@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "351409448135",
+    "project_id": "mdp-auth-bf341",
+    "storage_bucket": "mdp-auth-bf341.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:351409448135:android:e5d0f6893c88284c4c8ae2",
+        "android_client_info": {
+          "package_name": "com.example.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "351409448135-1l8nko015p1ttot75k7kjdac6s9jpl6u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.auth",
+            "certificate_hash": "a35498a60009e2237669569dfe6265f40941aaa5"
+          }
+        },
+        {
+          "client_id": "351409448135-p8pjc24f5pap7mfcn9l9o51b5r26bb91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfq-0vKc_kTLxxjw4qoicCNHQkCj5ImEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "351409448135-p8pjc24f5pap7mfcn9l9o51b5r26bb91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
