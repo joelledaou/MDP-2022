@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../reusable_widgets/reusable_widgets.dart';
 import '../utils/colors.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'Home.dart';
+import 'SignIn.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -61,20 +62,51 @@ class _SignUpState extends State<SignUp> {
                             true,
                             _confirmPasswordTextController),
                         const SizedBox(height: 20),
-                        SignInSignUpButton(context, false, () {
-                          FirebaseAuth.instance.createUserWithEmailAndPassword(
-                              email: _emailTextController.text,
-                              password: _passwordTextController.text)
+                        firebaseUIButton(context, "SIGN UP", () {
+                          FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: _emailTextController.text,
+                                  password: _passwordTextController.text)
                               .then((value) {
-                                print("Created new account");
-                                Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) => Home()));
-                              })
-                              .onError((error, stackTrace) {
-                                print("Error ${error.toString()}");
-                              });
-                        })
+                            print("Created new account");
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Home()));
+                          }).onError((error, stackTrace) {
+                            print("Error ${error.toString()}");
+                          });
+                        }),
+                        const SizedBox(height: 5.0),
+                        SignInButton(
+                          Buttons.Google,
+                          text: "Sign up with Google",
+                          //shape: ,
+                          onPressed: () {},
+                        ),
+                        const SizedBox(height: 20.0),
+                        signInOption()
                       ],
                     )))));
+  }
+
+  Row signInOption() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("Already have an account? Log in",
+            style: TextStyle(color: Colors.white70)),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => SignIn()));
+          },
+          child: const Text(
+            " here",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        )
+      ],
+    );
   }
 }

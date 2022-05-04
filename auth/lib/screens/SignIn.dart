@@ -4,6 +4,7 @@ import '../utils/colors.dart';
 import '../reusable_widgets/reusable_widgets.dart';
 import 'Home.dart';
 import 'SignUp.dart';
+import 'ResetPassword.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -30,30 +31,35 @@ class _SignInState extends State<SignIn> {
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
+            //MediaQuery.of(context).size.height * 0.2 
             padding: EdgeInsets.fromLTRB(
-                20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+                20, 100, 20, 0),
             child: Column(
               children: <Widget>[
-                logoWidget("assets/images/logo1.png"),
-                SizedBox(height: 45),
+                //logoWidget("assets/images/logo3.jpg"),
+                SizedBox(height: 100),
                 reusableTextField("Enter username", Icons.person_outline, false,
                     _emailTextController),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
                 reusableTextField("Enter password", Icons.lock_outline, true,
                     _passwordTextController),
+                const SizedBox(
+                  height: 5,
+                ),
+                forgetPassword(context),
                 SizedBox(height: 20),
-                SignInSignUpButton(context, true, () {
-                  FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: _emailTextController.text,
-                      password: _passwordTextController.text)
+                firebaseUIButton(context, "LOG IN", () {
+                  FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: _emailTextController.text,
+                          password: _passwordTextController.text)
                       .then((value) {
-                        print("Login successful");
-                        Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => Home()));
-                      })
-                      .onError((error, stackTrace) {
-                        print("Error ${error.toString()}");
-                      });
+                    print("Login successful");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Home()));
+                  }).onError((error, stackTrace) {
+                    print("Error ${error.toString()}");
+                  });
                 }),
                 signUpOption()
               ],
@@ -81,6 +87,23 @@ class _SignInState extends State<SignIn> {
           ),
         )
       ],
+    );
+  }
+
+  Widget forgetPassword(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 35,
+      alignment: Alignment.bottomRight,
+      child: TextButton(
+        child: const Text(
+          "Forgot Password?",
+          style: TextStyle(color: Colors.white70),
+          textAlign: TextAlign.right,
+        ),
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ResetPassword())),
+      ),
     );
   }
 }
